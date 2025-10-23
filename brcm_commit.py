@@ -142,30 +142,11 @@ def clone_repo(repo_url, target_directory=None, src_branch=None, target_branch=N
 
     # NovSPP2025_Gen10Gen11Gen12
     # git checkout --orphan Gen10PlusGen11March2024_CVL
-
-    # try:
-    #     subprocess.run(command, check=True, capture_output=True, text=True)
-    #     print(f"Repository '{repo_url}' cloned successfully.")
-    # except subprocess.CalledProcessError as e:
-    #     print(f"Error cloning repository: {e}")
-    #     print(f"Stderr: {e.stderr}")
-    # except FileNotFoundError:
-    #     print("Error: 'git' command not found. Ensure Git is installed and in your PATH.")
     
     repository_path = current_path + "//Linux_Drivers_NXE"
     # "C://Users//choutin//Documents//Linux_Drivers_NXE"
     os.chdir(repository_path)
     # command1 = ["ls"] 
-
-    # try:
-    #     print(command1)
-    #     subprocess.run(command1, check=True, capture_output=True, text=True)
-    #     # print(f"11 Repository '{repo_url}' cloned successfully.")
-    # except subprocess.CalledProcessError as e:
-    #     print(f"11 Error cloning repository: {e}")
-    #     print(f"11 Stderr: {e.stderr}")
-    # except FileNotFoundError:
-    #     print("11 Error: 'git' command not found. Ensure Git is installed and in your PATH.")     
 
     command = ["git", "switch", src_branch]
     # command = ["cd C://Users//choutin//Documents//Linux_Drivers_NXE", "git", "checkout --orphan", target_branch]
@@ -173,15 +154,6 @@ def clone_repo(repo_url, target_directory=None, src_branch=None, target_branch=N
 
     command = ["git", "checkout", "--orphan", target_branch]
     exec_cmd(command)
-    # try:
-    #     subprocess.run(command, check=True, capture_output=True, text=True)
-    #     print(f"Repository '{repo_url}' cloned successfully.")
-    # except subprocess.CalledProcessError as e:
-    #     print(f"Error cloning repository: {e}")
-    #     print(f"Stderr: {e.stderr}")
-    # except FileNotFoundError:
-    #     print("Error: FileNotFoundError") 
-        # print("Error: 'git' command not found. Ensure Git is installed and in your PATH.") 
 
 def clear_git_kmps_folder():
     git_f = current_path + "//Linux_Drivers_NXE//kmps"
@@ -195,15 +167,6 @@ def clear_git_kmps_folder():
             os.chdir(del_path)
             command = ["rm", "*.rpm"]
             exec_cmd(command)
-
-            # try:
-            #     subprocess.run(command, check=True, capture_output=True, text=True)
-            #     print(f"clear_git_folder Repository '{git_f}' cloned successfully.")
-            # except subprocess.CalledProcessError as e:
-            #     print(f"clear_git_folder Error cloning repository: {e}")
-            #     print(f"clear_git_folder Stderr: {e.stderr}")
-            # except FileNotFoundError:
-            #     print("clear_git_folder Error: 'git' command not found. Ensure Git is installed and in your PATH.")
 
 def clear_git_libbnxtre_folder():
     git_f = current_path + "//Linux_Drivers_NXE//libbnxtre"
@@ -223,15 +186,6 @@ def clear_git_libbnxtre_folder():
                     command = ["rm", "*.rpm"]
                     exec_cmd(command)
 
-                    # try:
-                    #     subprocess.run(command, check=True, capture_output=True, text=True)
-                    #     print(f"clear_git_libbnxtre_folder Repository '{git_f}' cloned successfully.")
-                    # except subprocess.CalledProcessError as e:
-                    #     print(f"clear_git_libbnxtre_folder Error cloning repository: {e}")
-                    #     print(f"clear_git_libbnxtre_folder Stderr: {e.stderr}")
-                    # except FileNotFoundError:
-                    #     print("clear_git_libbnxtre_folder Error: 'git' command not found. Ensure Git is installed and in your PATH.")
-
 def copy_to_git_folder(repo_url, target_directory=None, src_branch=None, target_branch=None):
     """
     Clones a Git repository.
@@ -248,45 +202,16 @@ def copy_to_git_folder(repo_url, target_directory=None, src_branch=None, target_
         command.append(target_directory)
 
     exec_cmd(command)
-    # try:
-    #     subprocess.run(command, check=True, capture_output=True, text=True)
-    #     print(f"Repository '{repo_url}' cloned successfully.")
-    # except subprocess.CalledProcessError as e:
-    #     print(f"Error cloning repository: {e}")
-    #     print(f"Stderr: {e.stderr}")
-    # except FileNotFoundError:
-    #     print("Error: 'git' command not found. Ensure Git is installed and in your PATH.")
     
     repository_path = current_path + "//Linux_Drivers_NXE"
     # "C://Users//choutin//Documents//Linux_Drivers_NXE"
     os.chdir(repository_path)
     command1 = ["ls"] 
-    # "cd C:\\Users\\choutin\\Documents\\Linux_Drivers_NXE", 
-    # subprocess.run(command, check=True, capture_output=True, text=True)
-    # command = ["git", "switch", src_branch]
-
-    # try:
-    #     print(command1)
-    #     subprocess.run(command1, check=True, capture_output=True, text=True)
-    #     # print(f"11 Repository '{repo_url}' cloned successfully.")
-    # except subprocess.CalledProcessError as e:
-    #     print(f"11 Error cloning repository: {e}")
-    #     print(f"11 Stderr: {e.stderr}")
-    # except FileNotFoundError:
-    #     print("11 Error: 'git' command not found. Ensure Git is installed and in your PATH.")   
- 
 
     command = ["git", "switch", src_branch]
     # command = ["cd C://Users//choutin//Documents//Linux_Drivers_NXE", "git", "checkout --orphan", target_branch]
     exec_cmd(command)
-    # try:
-    #     subprocess.run(command, check=True, capture_output=True, text=True)
-    #     print(f"Repository '{repo_url}' cloned successfully.")
-    # except subprocess.CalledProcessError as e:
-    #     print(f"Error cloning repository: {e}")
-    #     print(f"Stderr: {e.stderr}")
-    # except FileNotFoundError:
-    #     print("Error: FileNotFoundError") 
+
 
 with open("brcm_nxe_opt.yaml") as stream:
     try:
@@ -357,25 +282,9 @@ for linux_type in linux_os:
                         print('noooooo')
                         command = ["mkdir", path3]
                         exec_cmd(command)
-                        # try:
-                        #     subprocess.run(command, check=True, capture_output=True, text=True)
-                        #     print(f"suse mkdir file successfully.")
-                        # except subprocess.CalledProcessError as e:
-                        #     print(f"suse mkdir Error cloning repository: {e}")
-                        #     print(f"suse mkdir Stderr: {e.stderr}")
-                        # except FileNotFoundError:
-                        #     print("suse mkdir Error: FileNotFoundError") 
 
                         command = ["mkdir", path3 + "//" + "x86_64"]
                         exec_cmd(command)
-                        # try:
-                        #     subprocess.run(command, check=True, capture_output=True, text=True)
-                        #     print(f"suse mkdir file successfully.")
-                        # except subprocess.CalledProcessError as e:
-                        #     print(f"suse mkdir Error cloning repository: {e}")
-                        #     print(f"suse mkdir Stderr: {e.stderr}")
-                        # except FileNotFoundError:
-                        #     print("suse mkdir Error: FileNotFoundError") 
 
 
                     # del_path = directory_path + "//" + "x86_64"
@@ -383,14 +292,6 @@ for linux_type in linux_os:
                     # os.chdir(del_path)
                     # command = ["rm", "*.rpm"]
                     # # command = ["cd C://Users//choutin//Documents//Linux_Drivers_NXE", "git", "checkout --orphan", target_branch]
-                    # try:
-                    #     subprocess.run(command, check=True, capture_output=True, text=True)
-                    #     print(f"del file successfully.")
-                    # except subprocess.CalledProcessError as e:
-                    #     print(f"del Error cloning repository: {e}")
-                    #     print(f"del Stderr: {e.stderr}")
-                    # except FileNotFoundError:
-                    #     print("del Error: FileNotFoundError") 
                 else:
                     print(f"suse The directory '{directory_path}' does not exist.")
                     rhel_path = repository_path + "//" + "libbnxtre"
@@ -402,14 +303,7 @@ for linux_type in linux_os:
                     
                     command = ["mkdir", x.partition('.')[0]]
                     exec_cmd(command)
-                    # try:
-                    #     subprocess.run(command, check=True, capture_output=True, text=True)
-                    #     print(f"suse mkdir file successfully.")
-                    # except subprocess.CalledProcessError as e:
-                    #     print(f"suse mkdir Error cloning repository: {e}")
-                    #     print(f"suse mkdir Stderr: {e.stderr}")
-                    # except FileNotFoundError:
-                    #     print("suse mkdir Error: FileNotFoundError") 
+
                     path2 = rhel_path + "//" + x.partition('.')[0]
                     os.chdir(path2)
                     # lib_folder_name = x.replace('.', 'u')
@@ -419,27 +313,12 @@ for linux_type in linux_os:
                         lib_folder_name = x.replace('.', 'sp')
                     command = ["mkdir", lib_folder_name]
                     exec_cmd(command)
-                    # try:
-                    #     subprocess.run(command, check=True, capture_output=True, text=True)
-                    #     print(f"susemkdir file successfully.")
-                    # except subprocess.CalledProcessError as e:
-                    #     print(f"susemkdir Error cloning repository: {e}")
-                    #     print(f"susemkdir Stderr: {e.stderr}")
-                    # except FileNotFoundError:
-                    #     print("susemkdir Error: FileNotFoundError") 
                     
                     path3 = path2 + "//" + lib_folder_name
                     os.chdir(path3)
                     command = ["mkdir", "x86_64"]
                     exec_cmd(command)
-                    # try:
-                    #     subprocess.run(command, check=True, capture_output=True, text=True)
-                    #     print(f"susemkdir file successfully.")
-                    # except subprocess.CalledProcessError as e:
-                    #     print(f"susemkdir Error cloning repository: {e}")
-                    #     print(f"susemkdir Stderr: {e.stderr}")
-                    # except FileNotFoundError:
-                    #     print("susemkdir Error: FileNotFoundError") 
+ 
                 # src_path_to_target =  
                 print("xxxxxxxxxx")
                 target_path = path3 + "//" + "x86_64"
@@ -452,17 +331,7 @@ for linux_type in linux_os:
                 command = ["cp", src_path, target_path]
                 exec_cmd(command)
                 # command = ["cd C://Users//choutin//Documents//Linux_Drivers_NXE", "git", "checkout --orphan", target_branch]
-                # try:
-                #     subprocess.run(command, check=True, capture_output=True, text=True)
-                #     print(f"copy file successfully.")
-                # except subprocess.CalledProcessError as e:
-                #     print(f"Error cloning repository: {e}")
-                #     print(f"Stderr: {e.stderr}")
-                # except FileNotFoundError:
-                #     print("Error: FileNotFoundError") 
 
-
-exit
 
 linux_os = ['rhel', 'suse']
 for linux_type in linux_os:
@@ -489,14 +358,7 @@ for linux_type in linux_os:
                     # os.chdir(del_path)
                     # command = ["rm", "*.rpm"]
                     # # command = ["cd C://Users//choutin//Documents//Linux_Drivers_NXE", "git", "checkout --orphan", target_branch]
-                    # try:
-                    #     subprocess.run(command, check=True, capture_output=True, text=True)
-                    #     print(f"del file successfully.")
-                    # except subprocess.CalledProcessError as e:
-                    #     print(f"del Error cloning repository: {e}")
-                    #     print(f"del Stderr: {e.stderr}")
-                    # except FileNotFoundError:
-                    #     print("del Error: FileNotFoundError") 
+
                 else:
                     print(f"The directory '{directory_path}' does not exist.")
                     rhel_path = repository_path + "//" + "kmps"
@@ -505,27 +367,11 @@ for linux_type in linux_os:
                     command = ["mkdir", x.partition('.')[0]]
                     exec_cmd(command)
                     # command = ["cd C://Users//choutin//Documents//Linux_Drivers_NXE", "git", "checkout --orphan", target_branch]
-                    # try:
-                    #     subprocess.run(command, check=True, capture_output=True, text=True)
-                    #     print(f"mkdir file successfully.")
-                    # except subprocess.CalledProcessError as e:
-                    #     print(f"mkdir Error cloning repository: {e}")
-                    #     print(f"mkdir Stderr: {e.stderr}")
-                    # except FileNotFoundError:
-                    #     print("mkdir Error: FileNotFoundError") 
-                    
+
                     os.chdir(directory_path)
                     command = ["mkdir", "x86_64"]
                     exec_cmd(command)
                     # command = ["cd C://Users//choutin//Documents//Linux_Drivers_NXE", "git", "checkout --orphan", target_branch]
-                    # try:
-                    #     subprocess.run(command, check=True, capture_output=True, text=True)
-                    #     print(f"mkdir file successfully.")
-                    # except subprocess.CalledProcessError as e:
-                    #     print(f"mkdir Error cloning repository: {e}")
-                    #     print(f"mkdir Stderr: {e.stderr}")
-                    # except FileNotFoundError:
-                    #     print("mkdir Error: FileNotFoundError") 
                 
                 target_path = repository_path + "//" + "kmps" + "//" + x.partition('.')[0] + "//" + "x86_64"
                 print(target_path)
@@ -537,14 +383,6 @@ for linux_type in linux_os:
                 command = ["cp", src_path, target_path]
                 exec_cmd(command)
                 # command = ["cd C://Users//choutin//Documents//Linux_Drivers_NXE", "git", "checkout --orphan", target_branch]
-                # try:
-                #     subprocess.run(command, check=True, capture_output=True, text=True)
-                #     print(f"copy file successfully.")
-                # except subprocess.CalledProcessError as e:
-                #     print(f"Error cloning repository: {e}")
-                #     print(f"Stderr: {e.stderr}")
-                # except FileNotFoundError:
-                #     print("Error: FileNotFoundError") 
 
 
         # files = os.listdir(path)
