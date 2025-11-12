@@ -73,6 +73,7 @@ def do_Firmware_PLDM_NXE(drop_location, baseline_branch, new_branch):
                 print("pldm clone error")
                 print(f"pldm clone error Error exec_cmd: {e}")
                 print(f"pldm clone error Stderr: {e.stderr}")
+                # git pull --rebase origin test_NXE_pldm
             repo_name = y["type"]
             # now = datetime.now()
             # print("before do_Windows_Drivers_NXE")
