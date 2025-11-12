@@ -46,9 +46,9 @@ def git_commit(src_path, target_branch):
     command = ["git", "commit", "-m", "test for FW PLDM " + src_path]
     exec_cmd(command)
 
-    command = ["git", "pull", "--rebase", "origin", target_branch]
-    exec_cmd(command)
-    
+    # command = ["git", "pull", "--rebase", "origin", target_branch]
+    # exec_cmd(command)
+
     # git push --set-upstream origin test_commit_Nov
     command = ["git", "push", "--set-upstream", "origin", target_branch]
     exec_cmd(command)
