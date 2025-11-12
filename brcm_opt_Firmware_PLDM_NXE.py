@@ -38,12 +38,17 @@ def git_commit(src_path, target_branch):
     # --rebase 會把你的本地提交移到遠端最新提交之後，保持乾淨的歷史。
     # git pull --rebase origin test_NXE_pldm
 
+
+
     command = ["git", "add", "."]
     exec_cmd(command)
 
     command = ["git", "commit", "-m", "test for FW PLDM " + src_path]
     exec_cmd(command)
 
+    command = ["git", "pull", "--rebase", "origin", target_branch]
+    exec_cmd(command)
+    
     # git push --set-upstream origin test_commit_Nov
     command = ["git", "push", "--set-upstream", "origin", target_branch]
     exec_cmd(command)
