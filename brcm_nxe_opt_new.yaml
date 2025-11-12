@@ -1,0 +1,79 @@
+
+- type: Broadcom-Optimized-VMware_Drivers_NXE
+  files: zip
+  # git: https://github.hpe.com/SharedNetworking-Broadcom/VMware_Drivers_NXE.git
+  git: https://github.hpe.com/hpe/Broadcom-Optimized-VMware_Drivers_NXE.git
+  folder_prefix: release_2
+
+- type: Broadcom-Optimized-Windows_Drivers_NXE
+  # path: \drivers_linux\bundle\kmp\rhel
+  files: [cat, inf, sys]
+  git: https://github.hpe.com/hpe/Broadcom-Optimized-Windows_Drivers_NXE.git
+  folder_prefix: release_2
+  # file_prefix: kmod-bnxt_en
+
+- type: Broadcom-Optimized-Linux_Drivers_NXE
+  # path: \drivers_linux\bundle\kmp\rhel
+  files: rpm
+  git: https://github.hpe.com/hpe/Broadcom-Optimized-Linux_Drivers_NXE.git
+  folder_prefix: [rhel,suse]
+  # file_prefix: kmod-bnxt_en
+
+
+- type: Broadcom-Optimized-Firmware_PLDM_NXE
+  # path: \drivers_linux\bundle\kmp\rhel
+  files: rpm
+  git: https://github.hpe.com/hpe/Broadcom-Optimized-Firmware_PLDM_NXE.git
+  folder_prefix: [rhel,suse]
+
+
+# - type: Linux_Drivers_NXE
+#   path: \drivers_linux\bundle\kmp\suse
+#   files: rpm
+#   git: https://github.hpe.com/SharedNetworking-Broadcom/Linux_Drivers_NXE.git
+#   folder_prefix: sles
+#   file_prefix: bnxt_en-kmp-default- (no debuginfo-)
+
+# - type: VMware_Drivers_NXE (DUP)
+#   path: \drivers_linux\bundle\kmp\rhel
+#   files: rpm
+#   git: https://github.hpe.com/SharedNetworking-Broadcom/Linux_Drivers_NXE
+#   folder_prefix: rhel
+#   file_prefix: kmod-bnxt_en
+
+
+# - type: VMware_Drivers_NXE
+#   path: \drivers_vmware\bundle
+#   files: zip
+#   git: https://github.hpe.com/SharedNetworking-Broadcom/VMware_Drivers_NXE.git
+#   folder_prefix: async_
+#   file_prefix: Broadcom-bnxt-Net-RoCE
+
+# - type: FirmwareLibrary_Linux_NXE
+#   path: \utils\hpfwupglib\linux_x86_64
+#   files: so
+#   git: https://github.hpe.com/SharedNetworking-Broadcom/FirmwareLibrary_Linux_NXE.git
+#   folder_prefix: 
+#   file_prefix: libbrcm_ (check in folder x86_64/libs)
+
+# - type: FirmwareLibrary_VMware_NXE
+#   path: \utils\hpfwupglib\esxi7
+#   files: so
+#   git: https://github.hpe.com/SharedNetworking-Broadcom/FirmwareLibrary_VMware_NXE.git
+#   folder_prefix: 
+#   file_prefix: libbrcm_ (check in folder ESXi8.0 and ESXi9.0)
+
+# - type: FirmwareLibrary_Windows_NXE
+#   path: \utils\hpfwupglib\windows
+#   files: dll
+#   git: https://github.hpe.com/SharedNetworking-Broadcom/FirmwareLibrary_Windows_NXE.git
+#   folder_prefix: 
+#   file_prefix: libbrcm_ (check in folder x86_64)
+
+# - type: Firmware_NXE
+#   path: \board_sku_files
+#   files: pkg
+#   git: https://github.hpe.com/SharedNetworking-Broadcom/Firmware_NXE.git
+#   folder_prefix: 
+#   file_prefix: [535, 536, 537, 631]
+  
