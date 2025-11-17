@@ -1,8 +1,4 @@
-import yaml
-import subprocess
 import os
-import argparse
-import threading
 from datetime import datetime
 from util import exec_cmd, clone_repo, git_commit
 
@@ -31,22 +27,36 @@ def do_VMware_Drivers_NXE(drop_location, baseline_branch, new_branch):
         src_vmware_driver_path = path + "//" + x + "//signed"
         # C:\Users\choutin\Downloads\HPCD_v235.0.4.1\drivers_vmware\bundle\async_80_bundle\signed
         vmware_package_zip = os.listdir(src_vmware_driver_path)
+        print(vmware_package_zip)
         for package in vmware_package_zip:
-            if (len(vmware_package_zip) == 1):
-                cmd = 'mkdir ' + src_vmware_driver_path + "//" + package.replace(".zip", "")
-                cmd = '7z x ' + src_vmware_driver_path + "//" + package + ' -y -o' + src_vmware_driver_path + "//" + package.replace(".zip", "")
+            # if (len(vmware_package_zip) == 1):
+            if "-package.zip" in package: # Broadcom-bnxt-Net-RoCE_233.0.256.0-1OEM.800.1.0.20613240_24674977-package.zip
+                cmd = '7z x ' + src_vmware_driver_path + "//" + package + ' -y -o' + src_vmware_driver_path
+                print(cmd)
                 os.system(cmd)
-            # C:\Users\choutin\Downloads\HPCD_v235.0.4.1\drivers_vmware\bundle\async_80_bundle\signed
-            split_folder_name = x.split("_")
-            target_folder_name = "vSphere" + str(float(split_folder_name[1])/10)
-            # repo_path = os.path.abspath('../')
-            current_path = os.getcwd()
-            repository_path = current_path  + "//" + target_folder_name
-        
-        vendor_src = src_vmware_driver_path + "//" + package.replace(".zip", "") + "//" + package.replace("-package", "")
-        repo_dest = repository_path
-        command = ["cp", vendor_src, repo_dest]
-        exec_cmd(command)
+ 
+                # C:\Users\choutin\Downloads\HPCD_v235.0.4.1\drivers_vmware\bundle\async_80_bundle\signed
+                split_folder_name = x.split("_")
+                target_folder_name = "vSphere" + str(float(split_folder_name[1])/10)
+
+                repository_path = current_path  + "//" + repo_name + "//" + target_folder_name
+                print("vmware repository_path")
+                print(repository_path)
+                
+                if not os.path.isdir(repository_path):
+                    print(f"The directory '{repository_path}' does not exist.")
+                    # dest_kmp_path = repository_path + "//" + "kmps"
+                    
+                    command = ["mkdir", repository_path]
+                    exec_cmd(command)             
+
+                # vendor_src = src_vmware_driver_path + "//" + package.replace("-package", "")
+                vendor_src = src_vmware_driver_path + "//" + package.replace("-package", "") 
+                repo_dest = repository_path
+                print(vendor_src)
+                print(repo_dest)
+                command = ["cp", vendor_src, repo_dest]
+                exec_cmd(command)
 
     now = datetime.now()
     print("before do_VMware_Drivers_NXE git commit")

@@ -1,20 +1,19 @@
-import yaml
-import subprocess
 import os
 import argparse
-import threading
-import time
 from datetime import datetime
 from brcm_opt_VMware_Drivers_NXE import do_VMware_Drivers_NXE
 from brcm_opt_Linux_Drivers_NXE import do_Linux_Drivers_NXE
 from brcm_opt_Windows_Drivers_NXE import do_Windows_Drivers_NXE
 from brcm_opt_Firmware_PLDM_NXE import do_Firmware_PLDM_NXE
 from brcm_opt_Firmware_NXE import do_Firmware_NXE
+from brcm_open_Windows_Drivers_NXE import do_open_Windows_Drivers_NXE
+from brcm_open_Firmware_PLDM_NXE import do_open_Firmware_PLDM_NXE
+from brcm_open_Firmware_NXE import do_open_Firmware_NXE
 
 parser = argparse.ArgumentParser(description="A simple greeting script.")
-parser.add_argument("baseline_branch", type=str, help="The name of the person to greet.")
-parser.add_argument("new_branch", type=str, help="The age of the person.")
-parser.add_argument("drop_full_path_with_filename", type=str, help="The age of the person.")
+parser.add_argument("baseline_branch", type=str, help="The baseline branch for NXE.")
+parser.add_argument("new_branch", type=str, help="The new branch for NXE.")
+parser.add_argument("drop_full_path_with_filename", type=str, help="The vendor dorp of NXE.")
 componentlist = set()
 
 args = parser.parse_args()
@@ -26,11 +25,9 @@ tool_location = os.getcwd() # C:\Users\choutin\Documents\project\commit_tool_tes
 
 if __name__ == "__main__":
     threads = list()
-    print("eeee")
     drop_location = args.drop_full_path_with_filename.replace(".zip", "")
     print("drop_location")
     print(drop_location)
-    print("ddcccc drop_location")
     path_redefine = '7z x ' +  args.drop_full_path_with_filename + ' -y -o' + drop_location
     path_redefine = path_redefine.replace("\\", "//")
     print(path_redefine)
@@ -38,23 +35,38 @@ if __name__ == "__main__":
     now = datetime.now()
     print("before 7z start")
     print(now)
+    if not os.path.exists(args.drop_full_path_with_filename):
+        print(f"'{args.drop_full_path_with_filename}' does not exist.")
+        os._exit(1)
+
     os.system(path_redefine) #unzip .7z
 
     end = datetime.now()
     print("before 7z finished")
     print(end)
 
-    os.chdir(tool_location)
-    do_Linux_Drivers_NXE(drop_location, args.baseline_branch, args.new_branch)
+    if "HPCD_" in args.drop_full_path_with_filename: # NXE opt
+        os.chdir(tool_location)
+        do_Linux_Drivers_NXE(drop_location, args.baseline_branch, args.new_branch)
 
-    os.chdir(tool_location)
-    do_Windows_Drivers_NXE(drop_location, args.baseline_branch, args.new_branch)
+        os.chdir(tool_location)
+        do_Windows_Drivers_NXE(drop_location, args.baseline_branch, args.new_branch)
 
-    os.chdir(tool_location)
-    do_VMware_Drivers_NXE(drop_location, args.baseline_branch, args.new_branch)
+        os.chdir(tool_location)
+        do_VMware_Drivers_NXE(drop_location, args.baseline_branch, args.new_branch)
 
-    os.chdir(tool_location)
-    do_Firmware_NXE(drop_location, args.baseline_branch, args.new_branch)
+        os.chdir(tool_location)
+        do_Firmware_NXE(drop_location, args.baseline_branch, args.new_branch)
 
-    os.chdir(tool_location)
-    do_Firmware_PLDM_NXE(drop_location, args.baseline_branch, args.new_branch)
+        os.chdir(tool_location)
+        do_Firmware_PLDM_NXE(drop_location, args.baseline_branch, args.new_branch)
+    
+    elif "HPBCMCD_" in args.drop_full_path_with_filename: # NXE open
+        os.chdir(tool_location)
+        do_open_Windows_Drivers_NXE(drop_location, args.baseline_branch, args.new_branch)
+
+        os.chdir(tool_location)
+        do_open_Firmware_PLDM_NXE(drop_location, args.baseline_branch, args.new_branch)
+        
+        os.chdir(tool_location)
+        do_open_Firmware_NXE(drop_location, args.baseline_branch, args.new_branch)

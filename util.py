@@ -1,6 +1,7 @@
-import yaml
 import subprocess
 import os
+import json
+import re
 from datetime import datetime
 
 current_path = os.getcwd()
@@ -60,13 +61,58 @@ def git_commit(src_path, target_branch):
     command = ["git", "push", "--set-upstream", "origin", target_branch]
     exec_cmd(command)
 
-# def get_yaml():
-#     # with open("brcm_nxe_opt.yaml") as stream:
-#     with open("C://users//choutin//Documents//project//brcm_nxe_linux_driver//brcm_nxe_opt_new1212.yaml") as stream:
-#         try:
-#             return yaml.safe_load(stream)
-#             # print(yaml.safe_load(stream))
-#             # brcm_nxe_opt = yaml.safe_load(stream)
-#             # print(brcm_nxe_opt)
-#         except yaml.YAMLError as exc:
-#             print(exc)
+
+def clear_git_fw_folder(repo_name):
+    git_f = current_path + "//" + repo_name
+    del_path = git_f + "//" + "NVM"
+    print(del_path)
+    command = ["rm", del_path + "//" + "*.pkg"]
+    exec_cmd(command)
+
+def read_version(drop_location):
+    with open(drop_location + "//" + "release.txt", "r", encoding="utf-8") as f:
+        lines = f.readlines()
+
+    products = {}
+
+    for line in lines:
+        match = re.match(r"^(.*?)\s{2,}(\S+)", line)
+        if match and not line.strip().startswith("Product") and not line.strip().startswith("****"):
+            product = match.group(1).strip()
+            version = match.group(2).strip().rstrip('*')  # 移除星號
+            if re.search(r"\d", version):
+                products[product] = version
+
+    return products
+
+def modify_json(drop_location, repo_location):
+    version_list = read_version(drop_location)
+    jsonFile = open(repo_location + "//firmware.json","w")
+    data = {
+        "Firmware": [
+            {
+                "Chipset": "NXE",
+                "ComboVersion": version_list["NVM Package"],
+                "SubFwVers": {
+                    "Boot Code": version_list["BootCode(Wh+)"],
+                    "NCSI": version_list["APE (NCSI )"],
+                    "PXE": version_list["MBA Driver"],
+                    "UEFI": version_list["UEFI UNDI"],
+                    "CCM": "",
+                    "RoCE": version_list["Bono (RoCE)"]
+                }
+            }
+        ]
+    }
+    json.dump(data, jsonFile)
+
+def clear_git_win_driver_folder(repo_name):
+    git_f = current_path + "//" + repo_name
+    win_driver_folder = os.listdir(git_f)
+    print(win_driver_folder)
+    for x in win_driver_folder:
+        if (os.path.isdir(git_f + "//" + x)) and not x.startswith(".git"):
+            del_path = git_f + "//" + x
+            print(del_path)
+            command = ["rm", del_path + "//" + "*.*"]
+            exec_cmd(command)

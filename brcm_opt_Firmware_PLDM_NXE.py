@@ -1,8 +1,4 @@
-import yaml
-import subprocess
 import os
-import argparse
-import threading
 import re
 from datetime import datetime
 from util import exec_cmd, clone_repo, git_commit

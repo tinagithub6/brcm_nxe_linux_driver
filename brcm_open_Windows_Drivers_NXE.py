@@ -5,13 +5,13 @@ from util import exec_cmd, clone_repo, git_commit, clear_git_win_driver_folder
 current_path=os.getcwd()
 tool_location = os.getcwd()
 
-def do_Windows_Drivers_NXE(drop_location, baseline_branch, new_branch):
+def do_open_Windows_Drivers_NXE(drop_location, baseline_branch, new_branch):
     print('do_Windows_Drivers_NXE do_Windows_Drivers_NXE')
-    repo_name = "Broadcom-Optimized-Windows_Drivers_NXE"
-    clone_repo("https://github.hpe.com/hpe/Broadcom-Optimized-Windows_Drivers_NXE.git", None, baseline_branch, new_branch, repo_name)
+    repo_name = "Broadcom-Open-Windows_Drivers_Open_NXE"
+    clone_repo("https://github.hpe.com/hpe/Broadcom-Open-Windows_Drivers_Open_NXE.git", None, baseline_branch, new_branch, repo_name)
     clear_git_win_driver_folder(repo_name)
 
-    # path = "C://Users//choutin//Downloads//" + NXE_OPT + "//drivers_windows//bnxtnd//signed"
+    # src: C:\Users\choutin\Downloads\HPBCMCD_v235.0.4.2\drivers_windows\bnxtnd\signed
     path = drop_location + "//drivers_windows//bnxtnd//signed"
     win_distro1 = os.listdir(path)
     print(win_distro1)
